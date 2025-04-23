@@ -10,12 +10,8 @@ def get_num_chars(text):
             chars[char] = 1
     return chars
 
-def sort_on(d):
-    return d["num"]
-
 def sorted_list(dict):
     list = []
     for char in dict:
-        list.append({"char": char, "num": dict[char]})
-    list.sort(reverse=True, key=sort_on)
-    return list
+        num = dict[char]
+        list.append({char: num})
