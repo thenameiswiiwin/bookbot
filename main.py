@@ -1,3 +1,5 @@
+from stats import get_num_words
+
 def main():
     path = "./books/frankenstein.txt"
     text = get_book_text(path)
@@ -7,8 +9,5 @@ def main():
 def get_book_text(path):
     with open(path) as f:
         return f.read()
-
-def get_num_words(text):
-    return len(text.split())
 
 main()
