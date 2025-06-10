@@ -14,6 +14,13 @@ def main():
     num_words = get_num_words(text)
     chars_dict = get_chars_dict(text)
     chars_sorted_list = chars_dict_to_sorted_list(chars_dict)
+    print_report(path, num_words, chars_sorted_list)
+
+def get_book_text(path):
+    with open(path) as f:
+        return f.read()
+
+def print_report(path, num_words, chars_sorted_list):
     print("============ BOOKBOT ============")
     print(f"Analyzing book found at {path}...")
     print("----------- Word Count ----------")
@@ -24,9 +31,5 @@ def main():
             continue
         print(f"{item["char"]}: {item["num"]}")
     print("============= END ===============")
-
-def get_book_text(path):
-    with open(path) as f:
-        return f.read()
 
 main()
