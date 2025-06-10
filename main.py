@@ -9,16 +9,27 @@ def main():
     if len(sys.argv) != 2:
         print("Usage: python3 main.py <path_to_book>")
         sys.exit(1)
-    path = sys.argv[1]
-    text = get_book_text(path)
+
+    book_path = sys.argv[1]
+
+    text = get_book_text(book_path)
     num_words = get_num_words(text)
     chars_dict = get_chars_dict(text)
     chars_sorted_list = chars_dict_to_sorted_list(chars_dict)
-    print_report(path, num_words, chars_sorted_list)
+    print_report(book_path, num_words, chars_sorted_list)
 
 def get_book_text(path):
-    with open(path) as f:
-        return f.read()
+    try:
+        with open(path, encoding="utf-8") as f:
+           text = f.read()
+        print(f"Successfully read the book file: {path}")
+        return text
+    except FileNotFoundError:
+        print(f"Error: File not found: {path}")
+        sys.exit(1)
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        sys.exit(1)
 
 def print_report(path, num_words, chars_sorted_list):
     print("============ BOOKBOT ============")
@@ -29,7 +40,8 @@ def print_report(path, num_words, chars_sorted_list):
     for item in chars_sorted_list:
         if not item["char"].isalpha():
             continue
-        print(f"{item["char"]}: {item["num"]}")
+        print(f"{item['char']}: {item['num']}")
     print("============= END ===============")
 
-main()
+if __name__ == "__main__":
+    main()
